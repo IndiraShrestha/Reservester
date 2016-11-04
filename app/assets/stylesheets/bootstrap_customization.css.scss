@@ -1,0 +1,42 @@
+
+/****************** external website import *******************/
+@import "bootstrap";
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css");
+
+
+$body-bg: #ecf0f1;
+
+/*** styling the nav bar ****/
+/* background */
+.navbar-inverse{
+  background-color: white;
+  border-color: white;
+}
+
+/* title */
+.navbar-inverse .navbar-brand{
+  color: #da3743;
+}
+.navbar-inverse .navbar-brand:hover{
+  color: #C0C0C0;
+}
+
+
+/* link */
+.navbar-default .navbar-nav > li > a {
+    color: #333;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #C0C0C0;
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+# Postgress version 3.x
+#   gem install pg
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  template: template0
+  pool: 5
+  username: postgres
+  password: password
+  host: localhost
+  port: 5432
+  timeout: 5000p
+
+development:
+  <<: *default 
+  database: first_development
+  
+test:
+  
+production:
+  

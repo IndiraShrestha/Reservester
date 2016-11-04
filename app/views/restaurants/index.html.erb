@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<div id='restaurants' class='column'>
+  <div class='content-block-list'>
+    <% @restaurants.each do |restaurant| %>
+      <div class='content-block-list-row'>
+        <div class='column medium-7'>
+          <div class='rest-row-info'>
+          
+            <%= image_tag(restaurant.image.url(:thumbnail)) %>
+            <%= restaurant.name %>
+            <%= restaurant.address %>
+          </div>  
+         </div> 
+        </div>
+
+      </div>
+    <% end %>
+  </div>  
+</div>
+
+
+
+
