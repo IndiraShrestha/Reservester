@@ -1,14 +1,24 @@
 
 class RestaurantsController < ApplicationController
+  before_action :user_signed_in?, only: [:new, :create]
+  before_action :current_user, only: [:edit, :update, :destroy]
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
+
+  attr_accessor :reservation
+
 
   #Required for Carrierwave and mini_magick
   require 'carrierwave/orm/activerecord'
 
   # GET /restaurants
   # GET /restaurants.json
+  # to be able to perform the actions of reservations MVC in restaurant for using the form partial in restaurant show http://stackoverflow.com/questions/26159190/rendering-a-form-from-another-controller-in-ruby-on-rails-4
+  def reservation
+    @reservation = Reservation.new
+  end
+
   def index
-    @restaurants = Restaurant.all
+    @restaurants = Restaurant.all  
   end
 
   # GET /restaurants/1
@@ -17,8 +27,10 @@ class RestaurantsController < ApplicationController
   end
 
   # GET /restaurants/new
+  #added the current_user in the new and create method as it the restaurant belongs to the user 
+  # --- we wanted to make the current_user id to associated with the restaurant. 
   def new
-    @restaurant = Restaurant.new
+    @restaurant = current_user.restaurants.build
   end
 
   # GET /restaurants/1/edit
@@ -28,7 +40,7 @@ class RestaurantsController < ApplicationController
   # POST /restaurants
   # POST /restaurants.json
   def create
-    @restaurant = Restaurant.new(restaurant_params)
+    @restaurant = current_user.restaurants.build(restaurant_params)
 
     respond_to do |format|
       if @restaurant.save
