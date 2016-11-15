@@ -4,8 +4,6 @@ class RestaurantsController < ApplicationController
   before_action :current_user, only: [:edit, :update, :destroy]
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
 
-  attr_accessor :reservation
-
 
   #Required for Carrierwave and mini_magick
   require 'carrierwave/orm/activerecord'
@@ -13,9 +11,6 @@ class RestaurantsController < ApplicationController
   # GET /restaurants
   # GET /restaurants.json
   # to be able to perform the actions of reservations MVC in restaurant for using the form partial in restaurant show http://stackoverflow.com/questions/26159190/rendering-a-form-from-another-controller-in-ruby-on-rails-4
-  def reservation
-    @reservation = Reservation.new
-  end
 
   def index
     @restaurants = Restaurant.all  
@@ -24,6 +19,9 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1
   # GET /restaurants/1.json
   def show
+    #set the reservation as instance variable to be available for the show index in restaurant. 
+    @reservation = Reservation.new 
+    @reservations = Reservation.all  
   end
 
   # GET /restaurants/new

@@ -11,12 +11,30 @@
 </p>
 
 <p>
-  <strong>Image:</stro
+  <strong>Image:</strong>
   <%= image_tag @restaurant.image.thumb %>
 </p>
 
 <!-- followed the following "http://stackoverflow.com/questions/25126741/rails-4-rendering-new-action-on-view-that-uses-different-controller" which talks about reservation variable not being initiated  -->
 <%= render "/reservations/form", :reservation => @reservation %>
 
-<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
-<%= link_to 'Back', restaurants_path %>
+<% if current_user %>
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <%= reservation.email %>
+        <%= reservation.date_time %>
+        <td><%= link_to 'Mark as Confirmed', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      </br>
+    <% end %>
+   </tbody>
+ <% end %>
+
+</br>
+<div class="container">
+</br>
+  <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
+  <%= link_to 'Back', restaurants_path %>
+
+</div>

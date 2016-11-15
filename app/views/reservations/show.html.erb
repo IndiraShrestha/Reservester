@@ -1,4 +1,14 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Email:</strong>
+  <%= @reservation.email %> 
+</p>
+<p>
+  <strong>Date and Time</strong>
+  <%= @reservation.date_time %>
+</p>
+
+
 <%= link_to 'Edit', edit_reservation_path(@reservation) %> |
 <%= link_to 'Back', reservations_path %>

@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
-
+  # before_action :set_restaurant
   # GET /reservations
   # GET /reservations.json
   def index
@@ -18,14 +18,18 @@ class ReservationsController < ApplicationController
   def edit
   end
 
-  # POST /reservations
-  # POST /reservations.json
+  
+  #to create the reservation using the restaurant resource(via restaurant path), I followed http://stackoverflow.com/questions/32944854/associating-2-models-correctly-to-another-model-in-the-create-action-of-controll
+  #I needed to update the form to include the restaurant and also set_restaurant id 
+
   def create
-    @reservation = Reservation.new(reservation_params)
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @reservation = @restaurant.reservation.new(reservation_params)
+    # @reservation.restaurant_id = @restaurant.id
 
     respond_to do |format|
       if @reservation.save
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
+        format.html { redirect_to @restaurant, notice: 'Reservation was successfully created.' }
         format.json { render :show, status: :created, location: @reservation }
       else
         format.html { render :new }
@@ -63,6 +67,10 @@ class ReservationsController < ApplicationController
     def set_reservation
       @reservation = Reservation.find(params[:id])
     end
+
+    # def set_restaurant
+    #   @restaurant = Restaurant.find(params[:restaurant_id])
+    # end  
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
