@@ -31,6 +31,9 @@ class ReservationsController < ApplicationController
       if @reservation.save
         format.html { redirect_to @restaurant, notice: 'Reservation was successfully created.' }
         format.json { render :show, status: :created, location: @reservation }
+
+        # to send out confirmation email after the reservation is made
+        ReservationMailer.reservation_confirmation(@reservation, @restaurant).deliver
       else
         format.html { render :new }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }

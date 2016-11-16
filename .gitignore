@@ -22,3 +22,5 @@
 
 #Ignore secrets.yml file
 /config/secrets.yml
+
+#if i have hadn't had added this secret's file in the git ignore in then i need to run "git rm --cached name_of_file" which will delete the file from repo
